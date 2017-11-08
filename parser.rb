@@ -65,5 +65,6 @@ end
 class NullNode
   include Singleton
 end
+
 AtomNode = Struct.new(:value)
 ListNode = Struct.new(:car, :cdr)
