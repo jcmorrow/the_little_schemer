@@ -4,7 +4,6 @@ $: << File.expand_path("../..", __FILE__)
 
 require "interpreter"
 
-loop do
-  print " >"
-  puts Interpreter.new(gets).interpret
+while buf = Readline.readline("> ", true)
+  puts Interpreter.new(buf).interpret
 end
