@@ -1,13 +1,16 @@
-require "irb"
+require "generator"
+require "parser"
+require "tokenizer"
 
 class Interpreter
   def initialize(scheme)
     @scheme = scheme.strip
-    @tokens = Tokenizer.tokens
+    @tokens = Tokenizer.new(@scheme).tokens
+    @ast = Parser.new(@tokens).parse
+    @transpiled_code = Generator.new(@ast).generate
   end
 
   def interpret
-    # so first we tokenize right?
-    # This means we pull tokens off until we have no more expression left
+    eval(@transpiled_code)
   end
 end

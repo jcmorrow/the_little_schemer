@@ -14,6 +14,7 @@ class Parser
     until @tokens.empty?
       @tree << parse_one_token
     end
+    @tree
   end
 
   def parse_one_token
@@ -52,6 +53,9 @@ class Parser
   def parse_inner_list
     next_token = @tokens.first
     case next_token.type
+    when :car
+      consume(:car)
+      CarNode.new(parse_list)
     when :atom
       ListNode.new(AtomNode.new(consume(:atom).value), parse_inner_list)
     when :oparen
@@ -67,4 +71,5 @@ class NullNode
 end
 
 AtomNode = Struct.new(:value)
+CarNode = Struct.new(:list)
 ListNode = Struct.new(:car, :cdr)
