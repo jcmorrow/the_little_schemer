@@ -6,13 +6,12 @@ class Parser
 
   def initialize(tokens)
     @tokens = tokens
-    @tree = []
     parse
   end
 
   def parse
     until @tokens.empty?
-      @tree << parse_one_token
+      @tree = parse_one_token
     end
     @tree
   end
